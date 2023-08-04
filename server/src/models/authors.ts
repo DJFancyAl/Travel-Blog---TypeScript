@@ -1,11 +1,11 @@
 // Dependencies
-const mongoose = require('mongoose')
-const { Schema } = mongoose
-const bcrypt = require('bcrypt');
+import express from 'express';
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 
 // Author Schema
-const authorSchema = new Schema({
+const authorSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,

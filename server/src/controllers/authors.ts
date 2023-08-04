@@ -1,11 +1,12 @@
 // Dependencies
+import express from 'express';
 const router = require('express').Router()
-const bcrypt = require('bcrypt');
-const {createToken, validateToken} = require('../JWT')
+import bcrypt from 'bcrypt';
+import { createToken, validateToken } from '../JWT';
 const { Author, Blog } = require('../models')
 
 // Get All Authors
-router.get('/', async (req, res) => {
+router.get('/', async (req: express.Request, res: express.Response) => {
     try {
         const foundAuthors = await Author.find()
         res.status(200).json(foundAuthors)
@@ -15,11 +16,11 @@ router.get('/', async (req, res) => {
 })
 
 // Author View
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: express.Request, res: express.Response) => {
     try{
         const foundAuthor = await Author.findById(req.params.id).select("-password -username")
         const foundBlogs = await Blog.find({author: foundAuthor._id})
-        result = foundAuthor.toObject()
+        const result = foundAuthor.toObject()
         result.blogs = foundBlogs
         res.status(200).json(result)
     } catch (err) {
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // Create Author
-router.post('/', async (req, res) => {
+router.post('/', async (req: express.Request, res: express.Response) => {
     const {username, password, confirmPassword} = req.body
 
     // Check if username and password is provided
@@ -63,7 +64,7 @@ router.post('/', async (req, res) => {
 
 
 // Login
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: express.Request, res: express.Response) => {
     const { username, password } = req.body
 
     // Check if username and password is provided
@@ -97,7 +98,7 @@ router.post('/login', async (req, res) => {
 })
 
 // Update Author
-router.put('/:id', validateToken, async (req, res) => {
+router.put('/:id', validateToken, async (req: express.Request, res: express.Response) => {
     try {
         const updatedAuthor = await Author.findByIdAndUpdate(req.params.id, req.body)
         res.status(200).json({message: "SUCCESS! Your profile has been updated."})
@@ -107,7 +108,7 @@ router.put('/:id', validateToken, async (req, res) => {
 })
 
 // Delete Author
-router.delete('/:id', validateToken, async (req, res) => {
+router.delete('/:id', validateToken, async (req: express.Request, res: express.Response) => {
     try {
         const deletedAuthor = await Author.findByIdAndDelete(req.params.id)
         res.status(200).json({message: "Author Deleted!"})
@@ -117,7 +118,7 @@ router.delete('/:id', validateToken, async (req, res) => {
 })
 
 // Wildcard
-router.get('*', (req, res) => {
+router.get('*', (req: express.Request, res: express.Response) => {
     res.status(404).json({error: "Page not found."})
 })
 

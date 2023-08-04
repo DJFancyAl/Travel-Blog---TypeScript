@@ -1,11 +1,12 @@
 // Dependencies
+import express from 'express';
 require('dotenv').config()
 const router = require('express').Router()
-const {validateToken} = require('../JWT')
-const {Blog, Author, Comment} = require('../models')
+import { validateToken } from '../JWT'
+import { Blog, Author, Comment } from '../models'
 
 // Get All Blogs
-router.get('/', async (req, res) => {
+router.get('/', async (req: express.Request, res: express.Response) => {
     try {
         const foundBlogs = await Blog.find().sort({ date: 'desc'})
         .populate('author')
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 })
 
 // Blog View with comments
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: express.Request, res: express.Response) => {
     try{
         const foundBlog = await Blog.findById(req.params.id)
         .populate('author')
@@ -33,7 +34,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // Create Blog
-router.post('/', validateToken, async (req, res) => {
+router.post('/', validateToken, async (req: express.Request, res: express.Response) => {
     try {
         const createdBlog = await Blog.create(req.body)
         res.status(200).json(createdBlog)
@@ -43,7 +44,7 @@ router.post('/', validateToken, async (req, res) => {
 })
 
 // Update Blog
-router.put('/:id', validateToken, async (req, res) => {
+router.put('/:id', validateToken, async (req: express.Request, res: express.Response) => {
     try {
         const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body)
         res.status(200).json({message: "Updated Blog"})
@@ -53,7 +54,7 @@ router.put('/:id', validateToken, async (req, res) => {
 })
 
 // Delete Blog
-router.delete('/:id', validateToken, async (req, res) => {
+router.delete('/:id', validateToken, async (req: express.Request, res: express.Response) => {
     try {
         const deletedBlog = await Blog.findByIdAndDelete(req.params.id)
         res.status(200).json({message: "Blog Deleted!"})
@@ -63,7 +64,7 @@ router.delete('/:id', validateToken, async (req, res) => {
 })
 
 // Wildcard
-router.get('*', (req, res) => {
+router.get('*', (req: express.Request, res: express.Response) => {
     res.status(404).json({error: "Page not found."})
 })
 

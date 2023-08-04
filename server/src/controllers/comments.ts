@@ -1,10 +1,11 @@
 // Dependencies
+import express from 'express';
 const router = require('express').Router()
-const {validateToken} = require('../JWT')
-const {Blog, Comment} = require('../models')
+import { validateToken } from '../JWT';
+import { Blog, Comment } from '../models';
 
 // Create Comment
-router.post('/', validateToken, async (req,res) =>{
+router.post('/', validateToken, async (req: express.Request,res: express.Response) =>{
     try {
         const createdComment = await Comment.create(req.body)
         await createdComment.populate('author', ['name', 'pic']);
@@ -19,7 +20,7 @@ router.post('/', validateToken, async (req,res) =>{
 })
 
 // Delete Comment
-router.delete('/:id', validateToken, async (req, res) => {
+router.delete('/:id', validateToken, async (req: express.Request, res: express.Response) => {
     try{
         const deletedComment = await Comment.findByIdAndDelete(req.params.id)
         res.status(200).json({message: 'Deleted comment'})
