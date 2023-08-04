@@ -1,0 +1,116 @@
+## 1.0.0
+
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog---TypeScript
+- Updated the Readme File
+- Update README.md
+- Completed Exercise
+- Completed Exercise
+- Updated Index and App components.
+- Improved styling on blogs page.
+- Cleaned up styling, and removed some errors.
+- Improved margins on blogs page
+- Improved author image sizing and author blog list.
+- Changed image sizing on blogs posts.
+- Created a loading during initial fetch
+- Made the NavBar more responsive and added logo.
+- Implemented the 'AuthorContext' to reduce prop drilling.
+- Author info is now retreived from localstorage, to reduce excess logins.
+- Created 'GrowButton' component for animated buttons. Added validation.
+- Removed import on home page
+- Styled entire app. Color theme changed.
+- Added icons to all buttons
+- Now able to delete comments if you are the comment author.
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into abluemleiv
+- Began adding comment delete capabilities.
+- Merge pull request #28 from DJFancyAl/esteban
+- created delete comment route in comments controller
+- Merge pull request #27 from DJFancyAl/abluemleiv
+- Author views now work and show a list of blogs by that author.
+- Merge pull request #26 from DJFancyAl/abluemleiv
+- Cleaned up add and delete blog functions. Also blogs now sort so newest blog is at the top
+- Merge pull request #25 from DJFancyAl/abluemleiv
+- Fixed an issue with redirect when editing a blog.
+- Implemented the comment system
+- Complete merge.
+- Merge branch 'esteban' of https://github.com/DJFancyAl/Travel-Blog into abluemleiv
+- Merge pull request #24 from DJFancyAl/abluemleiv
+- Began implementing comments
+- Merge pull request #23 from DJFancyAl/abluemleiv
+- Added more form validation and alert messaging. Can now delete profile from profile page.
+- Merge pull request #22 from DJFancyAl/abluemleiv
+- Adding validation and alert messages to input forms.
+- Merge pull request #21 from DJFancyAl/abluemleiv
+- Blog author data is now passed. Posts can only be edited by the author who wrote it.
+- Merge pull request #19 from DJFancyAl/elkaAugustine
+- Merge pull request #20 from DJFancyAl/abluemleiv
+- Merge completed
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into abluemleiv
+- Debugging
+- Merge pull request #19 from DJFancyAl/elkaAugustine
+- adjusted get route to be able to view comments as well when you do a get request
+- merged homepage added links and Destination page
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into elkaAugustine
+- created schema for comments, created a temporary controller for comments to create and view individual comments
+- Merge pull request #18 from DJFancyAl/abluemleiv
+- Blogs page now shows blog data.
+- Merge pull request #17 from DJFancyAl/abluemleiv
+- Recreated Yash's changes.
+- added more style to the home page
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into elkaAugustine
+- updated styling
+- Merge pull request #15 from DJFancyAl/abluemleiv
+- Good time to do a push
+- Merge pull request #14 from DJFancyAl/elkaAugustine
+- added images to homepage
+- images added to home page
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into elkaAugustine
+- updates-committing just to pull
+- Merge pull request #13 from DJFancyAl/abluemleiv
+- User Registration and Login/Logouts work.
+- User Registration works
+- Merge pull request #12 from DJFancyAl/abluemleiv
+- Created the Edit Blog Page, added some bootstrap styling.
+- updated README
+- Merge pull request #11 from DJFancyAl/abluemleiv
+- Added basic view, fetches, and posts for the blog.
+- Merge pull request #10 from DJFancyAl/esteban
+- added seeded data for first blog and added cors
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into elkaAugustine
+- update
+- Merge pull request #9 from DJFancyAl/abluemleiv
+- Changed to React-Bootstrap
+- Merge pull request #8 from DJFancyAl/abluemleiv
+- Setup React Router and Created Basic Routes
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into elkaAugustine
+- update
+- Updated
+- Merge pull request #6 from DJFancyAl/yashpatel
+- Added navbar
+- added working navbar
+- Merge pull request #5 from DJFancyAl/yashpatel
+- Merge branch 'main' into yashpatel
+- added components
+- Merge pull request #4 from DJFancyAl/abluemleiv
+- Created Authors controller with routes and model.
+- Merge pull request #3 from DJFancyAl/abluemleiv
+- Finished all Blog routes
+- Merge pull request #2 from DJFancyAl/abluemleiv
+- Added a couple of routes to the blogs controller
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into abluemleiv
+- Merge pull request #1 from DJFancyAl/esteban
+- Added a couple of routes to posts controller
+- created blog schema for blog posts
+- estebans commit
+- Merge branch 'main' of https://github.com/DJFancyAl/Travel-Blog into esteban
+- first commit for branch
+- Stubbed posts routes
+- Added Nodemon
+- Added Body Parser to Server
+- test
+- Added PORT to server .env
+- Installed Mongoose and setup to use MONGO_URI
+- Setup controllers in express app
+- More setup work
+- Setup React and Express Apps
+- Added files
+- Initial commit
