@@ -17,17 +17,40 @@ import ResponsiveAppBar from "./Components/NavBar";
 import { AuthorContext } from "./Context/AuthorContext"
 import { Container } from "react-bootstrap";
 
+interface Blog {
+  _id: string;
+  author: Author;
+  pic: string;
+  date: Date;
+  body: string;
+  comments: [];
+}
+
+interface Author {
+  _id: string;
+  username: string;
+  name: string;
+  bio: string;
+  pic: string;
+}
+
 function App() {
   // States
   const [isLoading, setIsLoading] = useState(false)
-  const [author, setAuthor] = useState({});
-  const [blogs, setBlogs] = useState([]);
+  const [author, setAuthor] = useState<Author>({
+    _id: '',
+    username: '',
+    name: '',
+    bio: '',
+    pic: ''
+  });
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [authors, setAuthors] = useState([]);
 
   // Get Author
   useEffect(() => {
-    const storedAuthor = JSON.parse(localStorage.getItem('author'))
-    if(storedAuthor !== null) setAuthor(storedAuthor)
+    const storedAuthor = localStorage.getItem('author');
+    if(storedAuthor !== null) setAuthor(JSON.parse(storedAuthor))
   },[])
   
   // Fetches all blogs
@@ -45,27 +68,27 @@ function App() {
   }, [])
 
   // Add Blog
-  const addBlog = async (newBlog) => {
+  const addBlog = async (newBlog: any) => {
     const response = await fetch('http://localhost:3001/blogs', {
       method: "post",
       headers: {
         'Content-Type': 'application/json',
-        "x-access-token": localStorage.getItem('token')
+        "x-access-token": localStorage.getItem('token') || ''
       },
       body: JSON.stringify(newBlog)
     })
-    const data = await response.json()
+    const data: any = await response.json()
     setBlogs([data, ...blogs])
     return data._id
   }
 
   // Delete Blog
-  const deleteBlog = async (id) => {
+  const deleteBlog = async (id: string) => {
     const response = await fetch(`http://localhost:3001/blogs/${id}`, {
         method: "delete",
         headers: {
             'Content-Type': 'application/json',
-            "x-access-token": localStorage.getItem('token')
+            "x-access-token": localStorage.getItem('token') || ''
         }})
     const data = await response.json()
     if(data.message) {
@@ -93,7 +116,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/blogs" element={<Blogs blogs={blogs} />} />
               <Route path="/blog/new" element={<NewBlog addBlog={addBlog} />} />
-              <Route path="/blog/:id" element={<ShowBlog author={author._id} deleteBlog={deleteBlog} />} />
+              <Route path="/blog/:id" element={<ShowBlog deleteBlog={deleteBlog} />} />
               <Route path="/blog/edit/:id" element={<EditBlog />} />
               <Route path="/authors" element={<Authors authors={authors} />} />
               <Route path="/author/:id" element={<ShowAuthor />} />
