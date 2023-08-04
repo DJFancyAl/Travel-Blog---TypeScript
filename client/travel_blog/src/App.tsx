@@ -19,6 +19,7 @@ import { Container } from "react-bootstrap";
 
 interface Blog {
   _id: string;
+  title: string;
   author: Author;
   pic: string;
   date: Date;
@@ -45,7 +46,7 @@ function App() {
     pic: ''
   });
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [authors, setAuthors] = useState([]);
+  const [authors, setAuthors] = useState<Author[]>([]);
 
   // Get Author
   useEffect(() => {
@@ -68,7 +69,7 @@ function App() {
   }, [])
 
   // Add Blog
-  const addBlog = async (newBlog: any) => {
+  const addBlog = async (newBlog: Blog) => {
     const response = await fetch('http://localhost:3001/blogs', {
       method: "post",
       headers: {

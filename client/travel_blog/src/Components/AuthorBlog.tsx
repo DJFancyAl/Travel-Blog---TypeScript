@@ -2,7 +2,17 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup';
 
-function AuthorBlog({blog}) {
+interface Blog {
+    _id: string;
+    title: string;
+    date: string;
+}
+
+interface BlogProps {
+    blog: Blog
+}
+
+function AuthorBlog({blog}: BlogProps) {
     // State
     const formattedDate = new Date(blog.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
     const [hovered, setHovered] = useState(false)

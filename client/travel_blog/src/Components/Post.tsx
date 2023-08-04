@@ -4,7 +4,28 @@ import { Link } from "react-router-dom";
 import GrowButton from './GrowButton'
 import styles from '../CSS/Post.module.css'
 
-function Post({ blog }) {
+interface Author {
+  _id: string;
+  username: string;
+  name: string;
+  bio: string;
+  pic: string;
+}
+
+interface Blog {
+  _id: string;
+  title: string;
+  body: string;
+  date: Date;
+  pic: string;
+  author: Author;
+}
+
+interface PostProps {
+  blog: Blog
+}
+
+function Post({ blog }: PostProps) {
   // Styling
   const imageStyle = {
     backgroundImage: `url(${blog.pic})`,

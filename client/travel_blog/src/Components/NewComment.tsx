@@ -1,11 +1,40 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, FormEvent, ChangeEvent } from 'react'
 import { AuthorContext } from '../Context/AuthorContext';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { MdNoteAdd } from "react-icons/md";
 import GrowButton from './GrowButton'
 
-function NewComment( {blog, addComment} ) {
+
+interface Blog {
+    id: string;
+}
+
+interface CommentData {
+    _id: string;
+    author: Author;
+    blog: Blog;
+    date: string;
+    title: string;
+    body: string;
+}
+
+interface Author {
+    _id: string;
+    username: string;
+    name: string;
+    bio: string;
+    pic: string;
+}
+
+type AddComment = (param: CommentData) => void;
+
+interface NewCommentProps {
+    blog: string | undefined;
+    addComment: AddComment;
+}
+
+function NewComment( {blog, addComment}: NewCommentProps ) {
     // State
     const { author } = useContext(AuthorContext)
     const [comment, setComment] = useState({
@@ -16,7 +45,7 @@ function NewComment( {blog, addComment} ) {
     })
 
     // Handle Change
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target
         setComment({
         ...comment,
@@ -25,14 +54,14 @@ function NewComment( {blog, addComment} ) {
     }
 
     // Handle Submit
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
         const response = await fetch(`http://localhost:3001/comments`, {
         method: "post",
         headers: {
             'Content-Type': 'application/json',
-            "x-access-token": localStorage.getItem('token')
+            "x-access-token": localStorage.getItem('token') || ''
         },
         body: JSON.stringify(comment)
         })

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from "react-router-dom";
 import { AuthorContext } from '../../Context/AuthorContext';
 import Container from 'react-bootstrap/Container';
@@ -13,13 +13,13 @@ import GrowButton from '../GrowButton'
 function Register() {
     // State
     const [newAuthor, setNewAuthor] = useState({})
-    const [alert, setAlert] = useState({})
+    const [alert, setAlert] = useState({variant: '', message: ''})
     const [open, setOpen] = useState(false)
     const {setAuthor} = useContext(AuthorContext)
     const navigate = useNavigate()
 
     // Handle Change
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target
         setNewAuthor({
         ...newAuthor,
@@ -28,7 +28,7 @@ function Register() {
     }
 
     // Handle Form Submit
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
         const response = await fetch('http://localhost:3001/authors', {
@@ -82,7 +82,7 @@ function Register() {
                         </Form>
                         <Fade in={open} className='mt-3'>
                             <div>
-                                <Alert variant={alert.variant} onClose={() => setAlert({})}>{alert.message}</Alert>
+                                <Alert variant={alert.variant} onClose={() => setAlert({variant: '', message: ''})}>{alert.message}</Alert>
                             </div>
                         </Fade>
                     </Col>

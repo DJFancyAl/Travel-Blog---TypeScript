@@ -14,7 +14,7 @@ import image3 from "../../images/image3.png";
 function Home() {
   const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex) => {
+  const handleSelect = (selectedIndex: number) => {
     setIndex(selectedIndex);
   };
 

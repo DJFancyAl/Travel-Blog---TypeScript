@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthorContext } from '../../Context/AuthorContext';
 import Form from 'react-bootstrap/Form';
@@ -16,12 +16,15 @@ function Profile() {
     const navigate = useNavigate()
     const { author, setAuthor} = useContext(AuthorContext)
     const [changes, setChanges] = useState({...author})
-    const [alert, setAlert] = useState({})
+    const [alert, setAlert] = useState({
+        variant: '',
+        message: ''
+    })
     const [open, setOpen] = useState(false)
     const [showModal, setShowModal] = useState(false);
 
     // Handle Change
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target
         setChanges({
         ...changes,
@@ -30,13 +33,13 @@ function Profile() {
     }
 
     // Handle Form Submit
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const response = await fetch(`http://localhost:3001/authors/${author._id}`, {
         method: "put",
         headers: {
             'Content-Type': 'application/json',
-            "x-access-token": localStorage.getItem('token')
+            "x-access-token": localStorage.getItem('token') || ''
         },
         body: JSON.stringify(changes)
         })
@@ -60,11 +63,11 @@ function Profile() {
             method: "delete",
             headers: {
                 'Content-Type': 'application/json',
-                "x-access-token": localStorage.getItem('token')
+                "x-access-token": localStorage.getItem('token') || ''
             }})
         const data = await response.json()
         if(data.message) {
-            setAuthor({})
+            setAuthor({_id: '', username: '', name: '', bio: '', pic: ''})
             localStorage.clear();
             navigate('/')
         }
@@ -108,7 +111,7 @@ function Profile() {
                     </Form>
                     <Fade in={open} className='mt-3'>
                         <div>
-                            <Alert variant={alert.variant} onClose={() => setAlert({})}>{alert.message}</Alert>
+                            <Alert variant={alert.variant} onClose={() => setAlert({variant: '', message: ''})}>{alert.message}</Alert>
                         </div>
                     </Fade>
                 </Col>

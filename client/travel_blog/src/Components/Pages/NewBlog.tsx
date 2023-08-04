@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from "react-router-dom";
 import { AuthorContext } from '../../Context/AuthorContext';
 import Container from 'react-bootstrap/Container';
@@ -7,7 +7,8 @@ import Form from 'react-bootstrap/Form';
 import { MdNoteAdd } from "react-icons/md";
 import GrowButton from '../GrowButton'
 
-function NewBlog({ addBlog }) {
+
+function NewBlog({ addBlog }: any) {
   // State
   const navigate = useNavigate()
   const {author} = useContext(AuthorContext)
@@ -16,7 +17,7 @@ function NewBlog({ addBlog }) {
   })
 
   // Handle Change
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
     setNewBlog({
       ...newBlog,
@@ -25,7 +26,7 @@ function NewBlog({ addBlog }) {
   }
 
   // Handle Form Submit
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const newId = await addBlog(newBlog)
     navigate(`/blog/${newId}`)

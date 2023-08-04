@@ -6,7 +6,32 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { MdDelete } from "react-icons/md";
 
-function Comment( { comment, deleteComment } ) {
+interface CommentData {
+    _id: string;
+    author: Author;
+    date: string;
+    title: string;
+    body: string;
+}
+
+interface Author {
+    _id: string;
+    username: string;
+    name: string;
+    bio: string;
+    pic: string;
+  }
+
+interface DeleteComment {
+    (param: string): void;
+  }
+
+interface CommentProps {
+    comment: CommentData;
+    deleteComment: DeleteComment;
+}
+
+function Comment( { comment, deleteComment }: CommentProps ) {
     // State
     const {title, body, date, author} = comment
     const currentAuthor = useContext(AuthorContext).author
@@ -22,7 +47,7 @@ function Comment( { comment, deleteComment } ) {
             method: "delete",
             headers: {
                 'Content-Type': 'application/json',
-                "x-access-token": localStorage.getItem('token')
+                "x-access-token": localStorage.getItem('token') || ''
             }})
         const data = await response.json()
         if(data.message) {

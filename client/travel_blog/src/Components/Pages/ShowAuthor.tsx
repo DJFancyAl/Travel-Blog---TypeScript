@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 function ShowAuthor() {
     // States
     const {id} = useParams()
-    const [shownAuthor, setShownAuthor] = useState({comments: [], blogs: []})
+    const [shownAuthor, setShownAuthor] = useState({name: '', bio: '', pic: '', comments: [], blogs: []})
 
     // Fetch Blog
     useEffect(() => {

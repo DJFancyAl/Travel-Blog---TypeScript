@@ -11,11 +11,75 @@ import Comment from '../Comment';
 import NewComment from '../NewComment';
 import { MdDelete, MdEditNote } from "react-icons/md";
 
-function ShowBlog( { deleteBlog } ) {
+
+interface Blog {
+  _id: string;
+  author: Author;
+  title: string;
+  pic: string;
+  date: string;
+  body: string;
+  comments: Comment[];
+}
+
+interface Author {
+  _id: string;
+  username: string;
+  name: string;
+  bio: string;
+  pic: string;
+}
+
+interface Comment {
+  _id: string;
+  author: Author;
+  date: string;
+  title: string;
+  body: string;
+}
+
+interface DeleteBlog {
+  (param: string): void;
+}
+
+interface ShowBlogsProps {
+  deleteBlog: DeleteBlog
+}
+
+function ShowBlog( { deleteBlog }: ShowBlogsProps ) {
   // States
   const {id} = useParams()
   const { author } = useContext(AuthorContext)
-  const [blog, setBlog] = useState({comments: []})
+  const [blog, setBlog] = useState<Blog>({
+    _id: '',
+    author: {
+      _id: '',
+      username: '',
+      name: '',
+      bio: '',
+      pic: ''
+    },
+    pic: '',
+    title: '',
+    date: '',
+    body: '',
+    comments: [
+      {
+        _id: '',
+        author: {
+          _id: '',
+          username: '',
+          name: '',
+          bio: '',
+          pic: ''
+        },
+        date: '',
+        title: '',
+        body: ''
+      }
+    ]
+  });
+  
   const navigate = useNavigate()
   const formattedDate = new Date(blog.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric' })
 
@@ -32,7 +96,7 @@ function ShowBlog( { deleteBlog } ) {
   }, [id])
   
   // Add Comment
-  const addComment = (comment) => {
+  const addComment = (comment: Comment) => {
     setBlog({
       ...blog,
       comments: [...blog.comments, comment]
@@ -40,7 +104,7 @@ function ShowBlog( { deleteBlog } ) {
   }
   
   // Delete Comment
-  const deleteComment = (commentId) => {
+  const deleteComment = (commentId: string) => {
     setBlog({
       ...blog,
     comments: blog.comments.filter(comment => comment._id !== commentId)
@@ -63,7 +127,7 @@ function ShowBlog( { deleteBlog } ) {
       <h1 onClick={() => console.log(blog)}>{blog.title}</h1>
       <p className='fst-italic'>{formattedDate}</p>
       {blog.author && <p className="lead">Written By: {blog.author.name}</p>}
-      <div className='my-3 overflow-auto' style={{whiteSpace: 'pre-wrap'}}>{blog.pic && <Image className='ms-3 mb-3 shadow' style={{maxWidth: '50%'}} align='right' src={blog.pic} alt={blog.title} />}{blog.body}</div>
+      <div className='my-3 overflow-auto' style={{whiteSpace: 'pre-wrap'}}>{blog.pic && <Image className='ms-3 mb-3 shadow' style={{maxWidth: '50%', float: 'right'}} src={blog.pic} alt={blog.title} />}{blog.body}</div>
       
       {blog.author && blog.author._id === author._id && 
         <>

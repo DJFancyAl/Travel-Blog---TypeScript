@@ -1,19 +1,26 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { MdEditNote } from "react-icons/md";
 import GrowButton from '../GrowButton'
 
+interface Blog {
+    _id: string;
+    title: string;
+    pic: string;
+    body: string;
+}
+
 function EditBlog() {    
     // State
     const {id} = useParams()
     const navigate = useNavigate()
-    const [editedBlog, setEditedBlog] = useState({title: '', pic: '', body: ''})
+    const [editedBlog, setEditedBlog] = useState<Blog>({_id: '', title: '', pic: '', body: ''})
 
     // Handle Change
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target
         setEditedBlog({
         ...editedBlog,
@@ -22,13 +29,13 @@ function EditBlog() {
     }
 
     // Handle Form Submit
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const response = await fetch(`http://localhost:3001/blogs/${id}`, {
         method: "put",
         headers: {
             'Content-Type': 'application/json',
-            "x-access-token": localStorage.getItem('token')
+            "x-access-token": localStorage.getItem('token') || ''
         },
         body: JSON.stringify(editedBlog)
         })

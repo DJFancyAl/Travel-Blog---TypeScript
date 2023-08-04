@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
 
-function GrowButton({ children, variant, type, start = '150px', end = '200px', length = '0.4' }) {
+interface GrowButtonProps {
+    children: ReactNode | ReactNode[];
+    variant: string;
+    type?: 'button' | 'submit' | 'reset';
+    start?: string;
+    end?: string;
+    length?: string;
+}
+
+function GrowButton({ children, variant, type, start = '150px', end = '200px', length = '0.4' }: GrowButtonProps) {
     const [hovered, setHovered] = useState(false)
 
     const style = {

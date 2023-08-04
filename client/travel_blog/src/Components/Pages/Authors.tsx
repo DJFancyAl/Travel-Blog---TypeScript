@@ -7,7 +7,19 @@ import { MdPerson } from "react-icons/md";
 import GrowButton from '../GrowButton'
 import styles from '../../CSS/Authors.module.css'
 
-function Authors( { authors }) {
+interface Author {
+    _id: string;
+    username: string;
+    name: string;
+    bio: string;
+    pic: string;
+}
+  
+interface AuthorsProps {
+    authors: Author[];
+  }
+
+function Authors( { authors }: AuthorsProps) {
 
     // Create the Author List
     const authorList = authors.map(author => {
@@ -18,7 +30,7 @@ function Authors( { authors }) {
                     <Card.Body className='d-flex flex-column align-items-start'>
                         <Card.Title>{author.name}</Card.Title>
                         <Card.Text className='flex-fill'>{author.bio}</Card.Text>
-                        <Link to={`/author/${author._id}`}><GrowButton variant='primary' start='150px' end='220px'>View Author <MdPerson className='mb-1' size={20} /></GrowButton></Link>
+                        <Link to={`/author/${author._id}`}><GrowButton variant='primary' type='button' start='150px' end='220px'>View Author <MdPerson className='mb-1' size={20} /></GrowButton></Link>
                     </Card.Body>
                 </Card>
             </Col>

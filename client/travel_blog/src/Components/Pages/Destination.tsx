@@ -5,7 +5,6 @@ function Destination() {
     <div>
       <h1>Destination Page</h1>
       <p>Welcome to the Destination Page!</p>
-      {/* Add*/}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 import { Link, NavLink } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -16,7 +16,13 @@ function NavBar() {
 
   // Logout
   const logout = () => {
-    setAuthor({});
+    setAuthor({
+      _id: '',
+      username: '',
+      name: '',
+      bio: '',
+      pic: ''
+    });
     localStorage.clear();
     navigate("/");
   }
@@ -43,15 +49,21 @@ function NavBar() {
           </Nav>
           {author._id ? <Nav>
             <div>
-              <Button className='me-3' as={Link} to="./authors/profile">Hello {author.username}! <MdPerson2 className="mb-1" size={18} /></Button>
+              <Link to="/authors/profile" className="btn btn-dark me-3">
+                Hello {author.username}! <MdPerson2 className="mb-1" size={18} />
+              </Link>
               <Button onClick={logout}>Logout <MdLogout className="mb-1" size={18} /></Button>
             </div>
           </Nav>
           :
           <Nav>
             <div>
-              <Button className='me-3' as={Link} to="./authors/register">Register <MdPersonAddAlt1 className="mb-1" size={18} /></Button>
-              <Button as={Link} to="./authors/login">Login <MdLogin size={20} /></Button>
+            <Link to="/authors/register" className="btn btn-dark me-3">
+              Register <MdPersonAddAlt1 className="mb-1" size={18} />
+            </Link>
+            <Link to="/authors/login" className="btn btn-dark">
+              Login <MdLogin size={20} />
+            </Link>
             </div>
           </Nav>}
         </Navbar.Collapse>
