@@ -52,27 +52,62 @@ The front end is also styled using [React-Bootstrap](https://react-bootstrap.net
 
 The back end server is built using [Express.js](https://expressjs.com/). Express allowed us to use JavaScript for building our routes and serving data to the front end. Within Express we also used Bcrypt to hash and verify passwords. Additionally we create JSON Web Tokens for authentication.
 
-### MongoDB
+## Project Description
 
-App data is stored in a [MongoDB](https://www.mongodb.com/) Atlas database. This contains all of the user, blog, and comment data that is used by our app.
+We are looking to create a Travel blog with the ability for travelers to blog, upload content and leave comments.
+Authors will have an opportunity to read the blogs of others and recommend new locations and travel tips.
 
-## Technical Information
+Create the user interface.
+The application will have frontend CSS an Framework.
+The Backend will use JavaScript, Bootstrap.
+Tables and routes created.
 
-The Travel Blog may be installed and used locally. To do this, begin by downloading this repository. Once downloaded you will notice there are two directories - one for the client(front end) and one for the server(back end). You'll need to start both of these services separately.
+## Project Planning
 
-To start the back end - open a console and change directory to the "server" folder. To start the server, enter "npm start" and the server will begin. However, you will likely need to add a couple of environment variables for it to work. Create a .env file and add these parameters:
+Front End - React, Bootstrap
 
-- PORT (the number your server will run on)
-- MONGO_URI (the URI of your Mongo database. This can be either local or cloud based)
-- JWT_SECRET (this should be a string of 10-15 random characters)
+Frontend Pages Needed:
 
-To start the front end - open another console and navigate to the /client/travel_blog/ directory. Once there enter "npm start" to begin the React service. You should then be able to open the app in your web browser. If you would like to use this front end in a production environment then you must use "npm run build" to create the app build.
+-Index
+-Posts
+-One Post View
+-Create Post
+-Authors
+-Author View
 
-## Issues
+Back End - Express.js
+Backend Routes Needed:
+Posts Controller
+Get - all blog posts
+Get - One blog view
+POST - Create blog post
+UPDATE - Update blog post
+DELETE - Delete blog post
+Wildcard
 
-There are several known issues with this app which will hopefully be fixed in the future:
+Database - MongoDB
+Tables Needed:
+Blog Posts
+Author (String)
+Pic(String) (users will submit image link)
+Location (String)
+Title (String)
+Data (Date)
+BodyText (String)
+Comments
+Author (String)
+BodyText(String)
 
-- There can be improved use of the JSON web tokens to provide better authentication. Additionally using session tokens would add more security.
-- There is definitely room for improvement of formatting on almost all pages.
-- Users have very limited control over blog images. Ideally the users could upload their own photos (instead of linking them), they could add multiple images, and move their position within the post.
-- It would be nice for users to write their own summaries - this would require an additionaly field available when creating posts.
+Tasks:
+Front End
+Create React App
+Install Material UI
+Back End
+Npm init
+Create express app
+Setup server.js
+Setup controllers
+Setup Models
+MongoDB
+Create Database
+Create tables
